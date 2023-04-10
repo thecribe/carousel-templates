@@ -28,7 +28,7 @@ h6{
   font-size: .67rem;
 }
 
-p , a, .links{
+p , a, .links, .btn{
   font-size: 1rem;
   text-decoration: none;
   color: black;

@@ -1,37 +1,41 @@
-.root2 {
-  background-color: red;
-  height: 100vh;
-}
+// .root2 {
+//   background-color: red;
+//   height: 100vh;
+// }
 
-.visible {
-  height: 100vh;
-  position: relative;
-  visibility: hidden;
-}
+// .visible {
+//   height: 100vh;
+//   position: relative;
+//   visibility: hidden;
+// }
 
-.visible::after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  background-color: rgb(132, 0, 255);
-  top: 0;
-  left: 0;
-  right: 0;
+// .visible::after {
+//   content: "";
+//   height: 100%;
+//   width: 100%;
+//   background-color: rgb(132, 0, 255);
+//   top: 0;
+//   left: 0;
+//   right: 0;
 
-  //   background-color: purple;
-  //   animation: fly-in 2s 3s ease-in forwards;
-}
+//   //   background-color: purple;
+//   //   animation: fly-in 2s 3s ease-in forwards;
+// }
 
-.show-content {
-  visibility: visible;
-}
+// .show-content {
+//   visibility: visible;
+// }
 
 .carousel-container {
   position: relative;
-  background-color: blue;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+  // background: rgb(255,255,255);
+  // background: radial-gradient(
+  //   circle,
+  //   rgba(125, 120, 120, 0.8071603641456583) 12%,
+  //   rgba(65, 64, 64, 0.7511379551820728) 53%,
+  //   rgba(0, 0, 0, 1) 100%
+  // );
+
   .carousel-dots {
     position: absolute;
     bottom: 2%;
@@ -40,12 +44,19 @@
     display: flex;
     justify-content: center;
     gap: 2%;
+    z-index: 1;
     .dots {
       height: 20px;
       width: 20px;
       background-color: white;
       gap: 5%;
       border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
     .dots_current {
       background-color: yellow;
@@ -55,37 +66,181 @@
   .slides {
     display: none;
     height: 90vh;
-    animation: fly-in 3s ease-in-out;
+    background: radial-gradient(
+      circle,
+      rgba(125, 120, 120, 0.8071603641456583) 12%,
+      rgba(65, 64, 64, 0.7511379551820728) 53%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    // animation: fly-in 3s ease-in-out;
+    position: relative;
     // background-color: blue;
+
+    &_Bg {
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      width: 100%;
+      visibility: hidden;
+      animation: flyInTop 2s ease-in-out forwards;
+
+      img {
+        height: 90vh;
+        object-fit: cover;
+      }
+    }
     &-container {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
       height: 100%;
-      max-width: 1300px;
-      margin: 0 auto;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .slides-textBox {
+        text-align: center;
+        // background-color: rgba(0, 0, 0, 0.3);
+        background: radial-gradient(
+          circle,
+          rgba(0, 0, 0, 0.5214460784313726) 8%,
+          rgba(0, 0, 0, 0.5494572829131652) 35%,
+          rgba(51, 50, 50, 0.6054796918767507) 51%,
+          rgba(0, 0, 0, 0.11808473389355745) 82%,
+          rgba(0, 0, 0, 0) 91%
+        );
+        padding: 3rem;
+        width: 1000px;
+        margin: 0 auto;
+        visibility: hidden;
+        animation: fadeIn 1s 1s ease-in-out forwards;
+        h1 {
+          font-size: 4rem;
+          margin-bottom: 1rem;
+          color: white;
+          visibility: hidden;
+          animation: flyInTop 1s 2s ease-in-out forwards;
+        }
+        p {
+          text-align: center;
+          color: white;
+          line-height: 1.5;
+          margin-bottom: 2rem;
+          visibility: hidden;
+          animation: fadeIn 1s 3s ease-in-out forwards;
+        }
+
+        .btn {
+          background: none;
+          padding: 1rem 2rem;
+          position: relative;
+          z-index: 0;
+          background-color: white;
+          visibility: hidden;
+          animation: flyInDown 1s 4s ease-in-out forwards;
+
+          &:hover {
+            background: none;
+            color: white;
+          }
+          &:hover::after {
+            background-color: green;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            animation: btn-hover 1s ease-in-out infinite;
+          }
+        }
+      }
     }
   }
 
   .current {
     display: block;
   }
+
+  .carousel-thumbnail {
+    // background-color: red;
+    height: 100%;
+    // width: 10%;
+    position: absolute;
+    padding: 1% 0;
+    left: 1%;
+    top: 0;
+    z-index: 2;
+
+    .thumbnail {
+      width: 150px;
+      margin-top: 1rem;
+      transition: all 0.5s ease-in-out;
+      border: 5px solid rgba(255, 255, 255, 0);
+
+      img {
+        object-fit: cover;
+      }
+
+      &_current {
+        border: 5px solid rgb(255, 255, 255);
+        transform: scale(1.1);
+      }
+    }
+  }
 }
 
-@keyframes fly-in {
+@keyframes btn-hover {
   0% {
-    opacity: 0;
+    width: 10%;
+    left: 0;
+
     // transform: translateX(-100%);
   }
-
-  // 20% {
-  //   opacity: 0.5;
-  // }
-  // 50% {
-  //   transform: none;
-  // }
   100% {
+    width: 10%;
+    right: 0;
+    left: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  100% {
+    visibility: visible;
     opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes flyInDown {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@keyframes flyInTop {
+  0% {
+    visibility: visible;
+    opacity: 0.3;
+    transform: translateY(-100px);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
 }
