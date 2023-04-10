@@ -21,7 +21,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route path="/" element={<Carousel />} />
     </Route>
-  )
+  ),
+  { basename: "carousel-templates" }
 );
 
 const App = () => {
